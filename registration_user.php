@@ -8,7 +8,7 @@ $phone = addslashes(strip_tags ($_POST['phone']));
         $sql_insert = mysqli_query($con,"INSERT INTO user VALUES ('','$username','$email','$phone','$password')");
         ?>
             <script type="text/javascript">
-            window.location = "login.html";
+            window.location = "login_user.html";
         </script>
         
         <?php

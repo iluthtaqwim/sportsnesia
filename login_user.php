@@ -12,7 +12,7 @@ $password = addslashes(strip_tags ($_POST['password']));
     if ($count == 1) {
         ?>
         <script type="text/javascript">
-            window.location = "index.html";
+            window.location = "activity_player.html";
         </script>
         <?php
     }

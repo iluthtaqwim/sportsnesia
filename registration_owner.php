@@ -1,22 +1,27 @@
 <?php include "db.php"; 
-$name = addslashes(strip_tags ($_POST['name'])); 
+
+$np = addslashes(strip_tags ($_POST['namaPerusahaan']));
+$nama_pemilik = addslashes(strip_tags ($_POST['name'])); 
 $email = addslashes(strip_tags ($_POST['email'])); 
-$alamat = addslashes(strip_tags ($_POST['alamat'])); 
-$password = addslashes(strip_tags ($_POST['password'])); 
-$phone = addslashes(strip_tags ($_POST['phone'])); 
-$namaPerusahaan = addslashes(strip_tags ($_POST['namaPerusahaan'])); 
-$kategori = addslashes(strip_tags ($_POST['kategori'])); 
+$alamat = addslashes(strip_tags ($_POST['alamat']));
+$phone = addslashes(strip_tags ($_POST['phone']));
+$identitas = addslashes(strip_tags ($_POST['identitas']));
+$ni = addslashes(strip_tags($_POST['ni']));
+$ui = addslashes(strip_tags ($_POST['ui'])); 
 $kota = addslashes(strip_tags ($_POST['kota'])); 
+$password = addslashes(strip_tags ($_POST['pass'])); 
 
+  
 
-       if ($name&&$email&&$alamat&&$phone&&$namaPerusahaan{
-        $sql_insert = mysqli_query($con,"INSERT INTO owner VALUES ('','$name','$email','$alamat','$phone','$namaPerusahaan')");
+       if ($np&&$nama_pemilik&&$email&&$password&&$phone){
+        $sql_insert = mysqli_query($con,"INSERT INTO owner VALUES ('','$np','$nama_pemilik','$email','$alamat','$phone','$identitas','$ni','$ui','$kota','$password')");
         ?>
             <script type="text/javascript">
-            window.location = "login.html";
-        </script>
+                window.location = "login_owner.html";
+            </script>
         
         <?php
        }
            
+       
 ?>
