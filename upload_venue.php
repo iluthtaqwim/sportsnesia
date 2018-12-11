@@ -21,7 +21,7 @@ if(isset($_POST['upload'])) {
 
     ?>
     <script type="text/javascript">
-      window.location = "Owner.html";
+      window.location = "activity_player.php";
     </script>
     <?php
 

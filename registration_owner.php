@@ -9,7 +9,7 @@ $identitas = addslashes(strip_tags ($_POST['identitas']));
 $ni = addslashes(strip_tags($_POST['ni']));
 $image = $_FILES['image']['name'];
 $kota = addslashes(strip_tags ($_POST['kota'])); 
-$password = addslashes(strip_tags ($_POST['pass'])); 
+$password = md5(addslashes(strip_tags ($_POST['pass']))); 
 
 if(isset($_POST['upload'])) {
     $target = "assets/images/" .basename($_FILES['image']['name']);

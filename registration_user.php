@@ -1,7 +1,7 @@
 <?php include "db.php"; 
 $username = addslashes(strip_tags ($_POST['name'])); 
 $email = addslashes(strip_tags ($_POST['email'])); 
-$password = addslashes(strip_tags ($_POST['pass'])); 
+$password = md5(addslashes(strip_tags ($_POST['pass']))); 
 $phone = addslashes(strip_tags ($_POST['phone'])); 
 
        if ($username&&$email&&$password&&$phone){

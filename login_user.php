@@ -2,7 +2,7 @@
 include "db.php";
 
 $username = addslashes(strip_tags ($_POST['username'])); 
-$password = addslashes(strip_tags ($_POST['password'])); 
+$password = md5(addslashes(strip_tags ($_POST['password']))); 
 
     $queryLogin = mysqli_query($con,"select * from user where username='$username' and password='$password'");
     $row = mysqli_fetch_array($queryLogin,MYSQLI_ASSOC);
@@ -12,7 +12,7 @@ $password = addslashes(strip_tags ($_POST['password']));
     if ($count == 1) {
         ?>
         <script type="text/javascript">
-            window.location = "activity_player.html";
+            window.location = "activity_player.php";
         </script>
         <?php
     }

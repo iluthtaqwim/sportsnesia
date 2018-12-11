@@ -4,7 +4,7 @@ include "db.php";
 $email = addslashes(strip_tags ($_POST['email'])); 
 $password = addslashes(strip_tags ($_POST['pass'])); 
 
-    $queryLogin = mysqli_query($con,"select * from owner where email='$email' and password='$password'");
+    $queryLogin = mysqli_query($con,"select * from owner where email='$email' and password='.md5($password).'");
     $row = mysqli_fetch_array($queryLogin,MYSQLI_ASSOC);
 
     $count = mysqli_num_rows($queryLogin);
