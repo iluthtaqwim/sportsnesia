@@ -1,3 +1,9 @@
+<?php 
+session_start();
+require_once 'db.php';
+if(isset($_SESSION['user'])) {
+	$data = $_SESSION['user']; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
 
-        <title>SPORTSNESIA</title>
+        <title>SPORTSNESIA </title>
 
         <!-- CSS -->        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
@@ -31,7 +37,7 @@
     </head>
 
     <body>
-  
+	<?php echo $data["username"]; }?>
     	<!-- Top menu -->
 		<nav class="navbar navbar-fixed-top navbar-no-bg" role="navigation">
 			<div class="container">
