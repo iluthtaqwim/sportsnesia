@@ -1,10 +1,17 @@
 <?php
 include "db.php"; 
-
+session_start();
 $msg = "";
 // if upload button is pressed
+if(empty($_SESSION['email']))
+{
+    echo "Anda harus login untuk mengupload gambar";
+}else{
+  $result = mysqli_query($con, "SELECT * FROM owner WHERE email='".$_SESSION['email']."' LIMIT 1");
+    $row = mysqli_fetch_assoc($result); 
+    $nama_pemilik=$row['nama_pemilik'];
 
-if(isset($_POST['upload'])) {
+
   $target = "assets/images/" .basename($_FILES['image']['name']);
 
   //get all the submitted data from the form
@@ -21,7 +28,7 @@ if(isset($_POST['upload'])) {
 
     ?>
     <script type="text/javascript">
-      window.location = "activity_player.php";
+      window.location = "profil_owner.php";
     </script>
     <?php
 
@@ -29,16 +36,15 @@ if(isset($_POST['upload'])) {
     $msg = "there was a problem uploading image";
   }
      if($_POST['radio'] == 1){
-       $sqlRb1 = "insert into upload_venue(kategori,nama_venue,harga_sewa,gambar_venue,jenis_lapangan,deskripsi) 
-       values ('$kategori','$nama','$harga','$image','Rumput','$text')";
+       $sqlRb1 = "insert into upload_venue(kategori,nama_venue,harga_sewa,gambar_venue,jenis_lapangan,deskripsi,nama_pemilik) 
+       values ('$kategori','$nama','$harga','$image','Rumput','$text','$nama_pemilik')";
        mysqli_query($con,$sqlRb1);
      }  //masukkan ke transaksi debit
     else{
-      mysqli_query($con,"insert into upload_venue(kategori,nama_venue,harga_sewa,gambar_venue,jenis_lapangan,deskripsi) 
-      values ('$kategori','$nama','$harga','$image','Bukan Rumput','$text')");
+      mysqli_query($con,"insert into upload_venue(kategori,nama_venue,harga_sewa,gambar_venue,jenis_lapangan,deskripsi,nama_pemilik) 
+      values ('$kategori','$nama','$harga','$image','Bukan Rumput','$text','$nama_pemilik')");
       
     } //masukkan ke transaksi kredit
    
 }
-
 ?>

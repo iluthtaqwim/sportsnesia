@@ -1,29 +1,28 @@
 <?php
+session_start();
 include "db.php";
 if (isset($_POST["login"]))
         {
-$username = addslashes(strip_tags ($_POST['username'])); 
-$password = addslashes(strip_tags ($_POST['password'])); 
+$username = $_POST['username']; 
+$password = $_POST['password']; 
 
     $queryLogin = mysqli_query($con,"select * from user where username='$username' and password='$password'");
     $row = mysqli_fetch_array($queryLogin,MYSQLI_ASSOC);
 
     $count = mysqli_num_rows($queryLogin);
 
+    if($count > 0){
+        $_SESSION['username'] = $username;
+        $_SESSION['status'] = "login";
+        echo "<script>alert('Anda Telah berhasil login')
+                window.location='activity_player.php?=$username'
+            </script>";
     
-    
-            $validakun=$queryLogin->num_rows;
-            if ($validakun==1)
-            {
-                $akun=$queryLogin->fetch_assoc();
-                $_SESSION["user"]=$akun;
-                $_SESSION["nama"]=$akun;
-                echo "<script>alert('Anda sukses login');</script>";
-                echo "<meta http-equiv='refresh' content='1;url=index.php'>";
-            }
-    else
-        {
-            echo "<script>alert('Anda gagal login, periksa akun anda!');</script>";
-            echo "<script>location='login_user.php';</script>";
-        }
+    }else{
+       echo "<script>alert('Username atau password anda salah, Coba cek kembali.')
+                window.location='login_user.html'
+            </script>";
     }
+}
+?>
+

@@ -1,5 +1,8 @@
 <?php include "db.php"; 
 
+if(isset($_POST['daftar'])){
+
+
 $np = addslashes(strip_tags ($_POST['namaPerusahaan']));
 $nama_pemilik = addslashes(strip_tags ($_POST['name'])); 
 $email = addslashes(strip_tags ($_POST['email'])); 
@@ -32,5 +35,7 @@ if(isset($_POST['upload'])) {
         $msg = "there was a problem uploading image";
     }
   }
+
+}
              
 ?>

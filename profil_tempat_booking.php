@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +102,10 @@
 
 include "db.php"; 
 $result = mysqli_query($con, "SELECT * FROM upload_venue where id='".$_GET['id']."'");
-while($record=mysqli_fetch_array($result)){?>
+
+while($record=mysqli_fetch_array($result)){
+	$owner = mysqli_query($con, "select * from owner where nama_pemilik='".$record['nama_pemilik']."'");
+			$row = mysqli_fetch_array($owner);?>
         
         <!--  -->
         <div class="features-container section-container">
@@ -157,14 +162,16 @@ while($record=mysqli_fetch_array($result)){?>
         	<i style=" margin-top: 2%; margin-left: 8%;" class="fa" data-toggle="tooltip" data-placement="bottom" title="PARKIR">&#xf1b9;</i>
 			<br><br>
         	<h4 style="margin-top: 2%; margin-left: 8%;">Kontak</h4>
-			<i style=" margin-top: 2%; margin-left: 8%;" class="fa">&#xf095; <br>0879912121</i>
-			<i style=" margin-top: 2%; margin-left: 8%;" class="glyphicon">&#x2709;telagafutsal@gmail.com</i> 
+			<i style=" margin-top: 2%; margin-left: 8%;" class="fa">&#xf095;<?php echo $row['phone'];?></i>
+			<i style=" margin-top: 2%; margin-left: 8%;" class="glyphicon">&#x2709;<?php echo $row['email'];?></i> 
 
 	
 			</div>
 			</div>
 
-			<?php } ?>
+			<?php 
+			}
+			 ?>
 			
 
       	

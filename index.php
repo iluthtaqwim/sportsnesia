@@ -1,8 +1,10 @@
-<?php 
+<?php
+require_once "db.php";
 session_start();
-require_once 'db.php';
-if(isset($_SESSION['user'])) {
-	$data = $_SESSION['user']; 
+
+$query = mysqli_query($con,"select * from user");
+$data  = mysqli_fetch_array($query);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +39,6 @@ if(isset($_SESSION['user'])) {
     </head>
 
     <body>
-	<?php echo $data["username"]; }?>
     	<!-- Top menu -->
 		<nav class="navbar navbar-fixed-top navbar-no-bg" role="navigation">
 			<div class="container">
@@ -57,8 +58,15 @@ if(isset($_SESSION['user'])) {
 						<li><a href="AboutUs.html">About Us</a></li>
 						
 						<li><a href="faq.html">FAQ</a></li>
-						<li><a class="btn btn-link-3" href="signup_user.html" target="_blank">REGISTER</a></li>
-						<li><a class="btn btn-link-3" href="login.html" target="_blank">LOGIN</a></li>
+						<li> 
+							<?php
+								if (empty($_SESSION['username'])) {
+								echo '<a class="btn btn-link-3" href="login.html" target="_blank">LOGIN</a>';
+								} else {
+								echo '<a class="btn btn-dark" href="logout.php">LOGOUT</a>';
+								}
+							?>
+						</li>
 					</ul>
 				</div>
 			</div>
