@@ -1,11 +1,7 @@
-<?php 
-    include_once "db.php";
-    session_start();
-
-    $query = mysqli_query($con,"select * from aktifitas");
-    $row = mysqli_fetch_array($query);
+<?php
+include_once "db.php";
+session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,25 +60,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="btn btn-link-3" href="buat_aktifitas.html">Buat Aktifitas <i class="fas fa-calendar-plus"></i></a></li>
 
-
-                    <li class="btn-group">
-
-                        <a type="button" class="btn btn-link-3" style="margin-left: 15px;">Sports <i class="fas fa-wallet"></i>
-                            Pay</a>
-                        <a type="button" class="btn btn-link-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Rp. 10.000</a></li>
-                            <li><a href="#">Top-Up</a></li>
-                            <li><a href="#">Withdraw</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Pengaturan</a></li>
-                        </ul>
-                    </li>
-
                     <li class="btn-group">
 
 
@@ -124,10 +101,7 @@
                 <div class="container ">
                     <div class="row">
 
-
-
-
-                        <form class="col-md-6 col-sx-12 description" action="upload_aktifitas.php" method="POST">
+                        <form class="col-md-6 col-sx-12 description" action="upload_aktifitas.php" method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="grid-2" style="font-weight: bold;">
                                     Kategori:
@@ -190,7 +164,7 @@
                                     Foto aktifitas
                                 </div>
                                 <div class="grid-4">
-                                    <input type="file" name="foto" accept="image/*">
+                                    <input type="file" name="image" accept="image/*"/>
                                 <div class="grid-2" style="font-weight: bold;">
                                     Privasi Aktifitas
                                 </div>

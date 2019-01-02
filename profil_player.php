@@ -7,7 +7,9 @@
         
         $user = mysqli_query($con, "select * from user where username = '".$_SESSION['username']."'limit 1");
         $row = mysqli_fetch_array($user);
-    
+
+        $aktifitas = mysqli_query($con, "select * from aktifitas where username = '".$row['username']."'order by id desc");
+        $user_aktifitas = mysqli_fetch_array($aktifitas);
 ?>
 
 <!DOCTYPE html>
@@ -63,26 +65,7 @@
             <div class="collapse navbar-collapse" id="top-navbar-1">
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li><a class="btn btn-link-3" href="buat_aktifitas.html">Buat Aktifitas <i class="fas fa-calendar-plus"></i></a></li>
-
-
-                    <li class="btn-group">
-
-                        <a type="button" class="btn btn-link-3" style="margin-left: 15px;">Sports <i class="fas fa-wallet"></i>
-                            Pay</a>
-                        <a type="button" class="btn btn-link-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Rp. 10.000</a></li>
-                            <li><a href="#">Top-Up</a></li>
-                            <li><a href="#">Withdraw</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Pengaturan</a></li>
-                        </ul>
-                    </li>
+                    <li><a class="btn btn-link-3" href="buat_aktifitas.php">Buat Aktifitas <i class="fas fa-calendar-plus"></i></a></li>
 
                     <li class="btn-group">
 
@@ -121,7 +104,7 @@
                             if ($row['foto_profilUser'] == "") {
                                 echo "<img src='assets/img/user.png' width='220px' height='220px' style='margin-top: -5%; margin-left: 5%;' >";
                             } else {
-                                echo "<img src='assets/images/foto_user/" . $row['foto_profil'] . "' width='220px' height='220px' class='rounded-circle'>";
+                                echo "<img src='assets/images/foto_user/" . $row['foto_profilUser'] . "' width='220px' height='220px' class='rounded-circle'>";
                             }
                         ?>
                         <div class="form-group">
@@ -162,16 +145,20 @@
 
         <div class="features-container section-container">
             <div class="container">
-                <h3>Riwayat Kunjungan</h3>
+                <h3>Riwayat Buat Aktifitas</h3>
+
+                <?php 
+                    foreach($aktifitas as $user_aktifitas){
+                        ?>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail" class="card">
                         <div class="w3-display-container">
-                            <img src="assets\img\search\telagafutsal.jpg" alt="Lights" width="348" height="160">
+                            <img src="<?php echo " assets/images/aktifitas/" . $user_aktifitas['gambar_aktifitas']; ?>" alt="Lights" width="348" height="160">
                             <div class="container" class="div.relative">
                                 <div class="w3-display-bottommiddle w3-container" class="bg-1">
-                                    <img src="assets\img\partner\telaga.png" alt="" width="75" height="75" style="margin-top: -3%;">
+                                    <img src="<?php echo "assets/images/foto_user/" . $row['foto_profilUser']; ?>" alt="" width="75" height="75" style="margin-top: -3%;">
 
-                                    <h3 style="margin-top: -3%; margin-left: 8%;">Telaga Futsal</h3>
+                                    <h3 style="margin-top: -3%; margin-left: 8%;"><?php echo $user_aktifitas['nama_aktifitas']; ?></h3>
 
                                     <p><i style="font-size:16px" class="fa">&#xf3c5;</i> Condongcatur, Depok, Sleman</p>
                                     <p><i style="font-size:16px" class="fa"></i>10 jam yang lalu</p>
@@ -183,72 +170,10 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail" class="card">
-                        <div class="w3-display-container">
-                            <img src="assets\img\search\difourbasket.jfif" alt="Lights" width="348" height="160">
-                            <div class="container" class="div.relative">
-                                <div class="w3-display-bottommiddle w3-container" class="bg-1">
-                                    <img src="assets\img\search\difour.jfif" alt="" width="75" height="75" style="margin-top: -3%;">
-
-                                    <h3 style="margin-top: -3%; margin-left: 8%;">Difour</h3>
-
-                                    <p><i style="font-size:16px" class="fa">&#xf3c5;</i> Condongcatur, Depok, Sleman</p>
-                                    <p><i style="font-size:16px" class="fa"></i>3 hari yang lalu</p>
-
-                                </div>
-
-                                <p><a href="profil_tempat_booking.html" class="btn btn-success" role="button">Pilih</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail" class="card">
-                        <div class="w3-display-container">
-                            <img src="assets\img\search\kolamrenang.jpg" alt="Lights" width="348" height="160">
-                            <div class="container" class="div.relative">
-                                <div class="w3-display-bottommiddle w3-container" class="bg-1">
-                                    <img src="assets\img\search\logokolamrenanguny.jpg" alt="" width="75" height="75"
-                                        style="margin-top: -3%;">
-
-                                    <h3 style=" font-size: 21px; margin-top: -3%; margin-left: 8%;">Kolam Renang FIK
-                                        UNY</h3>
-
-                                    <p><i style="font-size:16px" class="fa">&#xf3c5;</i> CaturTunggal, Depok, Sleman</p>
-                                    <p><i style="font-size:16px" class="fa"></i>1 minggu yang lalu</p>
-
-                                </div>
-
-                                <p><a href="profil_tempat_booking.html" class="btn btn-success" role="button">Pilih</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
+                    <?php } ?>
 
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -10,9 +10,7 @@ if(empty($_SESSION['username']))
   $result = mysqli_query($con, "SELECT * FROM user WHERE username='".$_SESSION['username']."' LIMIT 1");
     $row = mysqli_fetch_assoc($result); 
     $nama_user=$row['username'];
-
-
-  $target = "assets/images/aktifitas/" .basename($_FILES['image']['name']);
+}
 
   //get all the submitted data from the form
   $kategori = $_POST['kategori'];
@@ -23,21 +21,25 @@ if(empty($_SESSION['username']))
   $privasi = $_POST['privasi_aktifitas']; 
   $text = $_POST['deskripsi'];
   $batas = $_POST['batas'];
+  $tmp = $_FILES['image']['tmp_name'];
+
+  $target = "assets/images/aktifitas/" .$image;
 
   //now let's move the uploaded image into the folder: images
-  if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+  if (move_uploaded_file($tmp, $target)) {
     $msg = "Image uploaded successfully";
-
+    $upload = mysqli_query($con,"insert into aktifitas(kategori,nama_aktifitas,tanggal_mulai,tanggal_selesai,gambar_aktifitas,privasi_aktifitas,deskripsi,batas,username)
+                  values('$kategori','$nama','$dtMulai','$dtSelesai','$image','$privasi','$text','$batas','$nama_user')");
+    $get = mysqli_fetch_array($upload);
     ?>
     <script type="text/javascript">
-      window.location = "hasil_buat_aktifitas.php?id=<?php echo $row['id'];?>";
+      window.location = "hasil_buat_aktifitas.php?id=<?php echo $get['id'];?>";
     </script>
     <?php
 
   } else {
     $msg = "there was a problem uploading image";
   }
-    $upload = mysqli_query($con,"insert into aktifitas values('','$kategori','$nama','$dtMulai','$dtSelesai','$image','$privasi','$text','$batas','$nama_user')");
-    
-}
+   
+  
 ?>

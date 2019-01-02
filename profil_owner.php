@@ -64,27 +64,6 @@ if(empty($_SESSION['email'])){
         <ul class="nav navbar-nav navbar-right">
           <li><a class="btn btn-link-3" href="upload.php">Upload</a></li>
 
-          <li class="btn-group">
-
-            <a type="button" class="btn btn-link-3" style="margin-left: 15px;">Sports <i class="fas fa-wallet"></i> Pay</a>
-            <a type="button" class="btn btn-link-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Rp. 10.000</a></li>
-              <li><a href="#">Top-Up</a></li>
-              <li><a href="#">Withdraw</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Pengaturan</a></li>
-            </ul>
-          </li>
-
-
-
-
-
           <li><a class="btn btn-link-3" type="button">
               Reports <span class="badge">4</span>
             </a></li>
@@ -181,7 +160,8 @@ if(empty($_SESSION['email'])){
               </div>
 
               <p><a href="profil_tempat_booking.php?id=<?php echo $all_outlet['id']?>" class="btn btn-success" style="margin-left:17px" role="button">Pilih</a>
-              <a href="edit_tempat_booking.php?id=<?php echo $all_outlet['id']?>" class="btn btn-success" style="margin-left:17px" role="button">Edit</a></p>
+              <a href="edit_tempat_booking.php?id=<?php echo $all_outlet['id']?>" class="btn btn-success" style="margin-left:17px" role="button">Edit</a>
+              <a href="hapus_tempat_booking.php?id=<?php echo $all_outlet['id']?>" class="btn btn-success" style="margin-left:17px" role="button">Hapus</a></p>
             </div>
           </div>
         </div>
