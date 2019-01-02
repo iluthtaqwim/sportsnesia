@@ -1,15 +1,15 @@
 <?php
 include "db.php"; 
-$result = mysqli_query($con, "SELECT * FROM upload_venue");
+$result = mysqli_query($con, "SELECT * FROM upload_venue order by id desc");
 $i=1;
 $max=6;
 
     foreach($result as $row){
         ?>
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-12 col-md-3">
                     <div class="thumbnail" class="card">
                         <div class="w3-display-container">
-                        <?php echo "<img src='assets/images/".$row['gambar_venue']."' >";?> 
+                        <?php echo "<img width='250px' height='170px'  src='assets/images/".$row['gambar_venue']."' >";?> 
                         <div class="container" class="div.relative" >
                         <div class="w3-display-bottommiddle w3-container" class="bg-1"> 
                                

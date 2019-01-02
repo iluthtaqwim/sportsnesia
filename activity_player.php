@@ -56,7 +56,7 @@
                 <div class="collapse navbar-collapse" id="top-navbar-1">
                     <ul class="nav navbar-nav navbar-right">
                     
-                              <li><a class="btn btn-link-3" href="buat_aktifitas.html">Buat Aktifitas <i class="fas fa-calendar-plus"></i></a></li>               
+                              <li><a class="btn btn-link-3" href="buat_aktifitas.php">Buat Aktifitas <i class="fas fa-calendar-plus"></i></a></li>               
 
        
                         <li class="btn-group">
@@ -91,7 +91,7 @@
                         </ul>
                       </li>
 
-                        <li><a class="btn btn-link-3" href="profil_player.html">Profil <i class="fas fa-user-alt"></i></a></li>
+                        <li><a class="btn btn-link-3" href="profil_player.php">Profil <i class="fas fa-user-alt"></i></a></li>
 
                     </ul>
                 </div>

@@ -85,10 +85,7 @@
                       </li>
 
                         <li><a class="btn btn-link-3" href="profil_player.html">Profil <i class="fas fa-user-alt"></i></a></li>
-                    
-
-
-
+ 
                     </ul>
                 </div>
 			</div>

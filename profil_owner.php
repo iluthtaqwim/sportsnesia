@@ -6,7 +6,7 @@ if(empty($_SESSION['email'])){
 }else{
     $result = mysqli_query($con,"select * from owner where email = '".$_SESSION['email']."'limit 1");
     $row = mysqli_fetch_assoc($result); 
-    $outlet = mysqli_query($con,"SELECT * FROM upload_venue WHERE nama_pemilik='".$row['nama_pemilik']."'");
+    $outlet = mysqli_query($con,"SELECT * FROM upload_venue WHERE nama_pemilik='".$row['nama_pemilik']."'order by id DESC");
 
 ?>
 
@@ -176,18 +176,19 @@ if(empty($_SESSION['email'])){
                 <p><i style="font-size:16px" class="fa">&#xf3c5;</i>
                   <?php echo $row['alamat'];?>
                 </p>
-                <p><i style="font-size:16px" class="fa"></i>10 jam yang lalu</p>
+                <p><i style="font-size:16px" class="fa"></i><?php echo $all_outlet['tanggal_upload'];?></p>
 
               </div>
 
-              <p><a href="profil_tempat_booking.php?id=<?php echo $all_outlet['id']?>" class="btn btn-success" style="margin-left:17px" role="button">Pilih</a></p>
+              <p><a href="profil_tempat_booking.php?id=<?php echo $all_outlet['id']?>" class="btn btn-success" style="margin-left:17px" role="button">Pilih</a>
+              <a href="edit_tempat_booking.php?id=<?php echo $all_outlet['id']?>" class="btn btn-success" style="margin-left:17px" role="button">Edit</a></p>
             </div>
           </div>
         </div>
         <?php 
                       }  
               }
-            } 
+            }
           }?>
       </div>
       </div>

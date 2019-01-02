@@ -15,6 +15,7 @@ if(empty($_SESSION['email']))
   $target = "assets/images/" .basename($_FILES['image']['name']);
 
   //get all the submitted data from the form
+  
   $nama = $_POST['nama'];
   $harga = $_POST['harga'];
   $image = $_FILES['image']['name'];
@@ -37,14 +38,14 @@ if(empty($_SESSION['email']))
     $msg = "there was a problem uploading image";
   }
      if($_POST['radio'] == 1){
-       $sqlRb1 = "insert into upload_venue(kategori,nama_venue,harga_sewa,gambar_venue,jenis_lapangan,deskripsi,nama_pemilik,tanggal_upload) 
-       values ('$kategori','$nama','$harga','$image','Rumput','$text','$nama_pemilik', '$now')";
+       $sqlRb1 = "update upload_venue set kategori='$kategori',nama_venue='$nama' ,harga_sewa='$harga',gambar_venue='$image',jenis_lapangan='Rumput',deskripsi='$text',nama_pemilik='$nama_pemilik',tanggal_upload='$now' 
+       where id='".$_GET['id']."'";
        mysqli_query($con,$sqlRb1);
      }  //masukkan ke transaksi debit
     else{
-      mysqli_query($con,"insert into upload_venue(kategori,nama_venue,harga_sewa,gambar_venue,jenis_lapangan,deskripsi,nama_pemilik,tanggal_upload) 
-      values ('$kategori','$nama','$harga','$image','Bukan Rumput','$text','$nama_pemilik',  '$now')");
-      
+        $sqlRb1 = "update upload_venue set kategori='$kategori',nama_venue='$nama' ,harga_sewa='$harga',gambar_venue='$image',jenis_lapangan='Bukan Rumput',deskripsi='$text',nama_pemilik='$nama_pemilik',tanggal_upload='$now' 
+       where id='".$_GET['id']."'";
+       mysqli_query($con,$sqlRb1);
     } //masukkan ke transaksi kredit
    
 }
