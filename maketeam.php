@@ -1,6 +1,6 @@
 <?php
 
-include "koneksi.php";
+include "db.php";
 $type = "";
 session_start();
 
@@ -33,10 +33,10 @@ session_start();
     <div class="container bg-light p-5 rounded shadow-sm">
     <!-- <?php
 
-    if (empty($_SESSION['email'])) {
+    if (empty($_SESSION['username'])) {
         echo "Ada yang salah";
     } else {
-        $query = mysqli_query($con, "select * from owner where email='" . $_SESSION['email'] . "' limit 1");
+        $query = mysqli_query($con, "select * from user where username='" . $_SESSION['username'] . "' limit 1");
         ?> -->
         <h1>Make A Team</h1>
         <hr>
@@ -52,12 +52,12 @@ session_start();
                     Jumlah Anggota
                 </div>
                 <div class="grid-4">
-                  <button type="submit"><a href="index2.php?type=2orang">2 orang</a></button>
-                  <button type="submit"><a href="index2.php?type=4orang">4 orang</a></button>
+                  <button type="submit"><a href="maketeam.php?type=2orang">2 orang</a></button>
+                  <button type="submit"><a href="maketeam.php?type=4orang">4 orang</a></button>
                 </div><p>
                 <div class="grid-4">
                   <?php 
-$default = "index2.php";
+$default = "maketeam.php";
 @$type = $_GET['type'];
 
 if (!$type) {
@@ -68,18 +68,18 @@ if (!$type) {
             <select name="user1" class="drop form-control" style="width: 300px;">
                 <option value="">--orang ke 1--</option>
                 <?php 
-                    $query = mysqli_query($koneksi, "select nama from user");
+                    $query = mysqli_query($con, "select username from user");
                     while ($row = mysqli_fetch_array($query)) {
-                     echo "<option value='".$row['nama']."'>".$row['nama']."</option>";
+                     echo "<option value='".$row['username']."'>".$row['username']."</option>";
                        }
                 ?>
       </select><p></p>
       <select name="user2" class="drop form-control" style="width: 300px;">
                 <option value="">--orang ke 2--</option>
                 <?php 
-                    $query = mysqli_query($koneksi, "select nama from user");
+                    $query = mysqli_query($con, "select username from user");
                     while ($row = mysqli_fetch_array($query)) {
-                     echo "<option value='".$row['nama']."'>".$row['nama']."</option>";
+                     echo "<option value='".$row['username']."'>".$row['username']."</option>";
                        }
                 ?>
       </select>
@@ -88,40 +88,36 @@ if (!$type) {
           <select name="user1" class="drop form-control" style="width: 300px;">
                 <option value="">--orang ke 1--</option>
                 <?php 
-                    include'koneksi.php';
-                    $query = mysqli_query($koneksi, "select nama from user");
+                    $query = mysqli_query($con, "select username from user");
                     while ($row = mysqli_fetch_array($query)) {
-                     echo "<option value='".$row['nama']."'>".$row['nama']."</option>";
+                     echo "<option value='".$row['username']."'>".$row['username']."</option>";
                        }
                 ?>
       </select><p></p>
       <select name="user2" class="drop form-control" style="width: 300px;">
                 <option value="">--orang ke 2--</option>
                 <?php 
-                    include'koneksi.php';
-                    $query = mysqli_query($koneksi, "select nama from user");
+                    $query = mysqli_query($con, "select username from user");
                     while ($row = mysqli_fetch_array($query)) {
-                     echo "<option value='".$row['nama']."'>".$row['nama']."</option>";
+                     echo "<option value='".$row['username']."'>".$row['username']."</option>";
                        }
                 ?>
       </select><p></p>
       <select name="user3" class="drop form-control" style="width: 300px;">
                 <option value="">--orang ke 3--</option>
                 <?php 
-                    include'koneksi.php';
-                    $query = mysqli_query($koneksi, "select nama from user");
+                    $query = mysqli_query($con, "select username from user");
                     while ($row = mysqli_fetch_array($query)) {
-                     echo "<option value='".$row['nama']."'>".$row['nama']."</option>";
+                     echo "<option value='".$row['username']."'>".$row['username']."</option>";
                        }
                 ?>
       </select><p></p>
       <select name="user4" class="drop form-control" style="width: 300px;">
                 <option value="">--orang ke 4--</option>
                 <?php 
-                    include'koneksi.php';
-                    $query = mysqli_query($koneksi, "select nama from user");
+                    $query = mysqli_query($con, "select username from user");
                     while ($row = mysqli_fetch_array($query)) {
-                     echo "<option value='".$row['nama']."'>".$row['nama']."</option>";
+                     echo "<option value='".$row['username']."'>".$row['username']."</option>";
                        }
                 ?>
       </select>
@@ -178,7 +174,7 @@ if(isset($_POST['submit'])){
 /*$selected_val = $_POST['team_user'];  // Storing Selected Value In Variable
 echo "You have selected :" .$selected_val;  // Displaying Selected Value*/
 
-$default = "upload.php";
+$default = "maketeam.php";
 @$type = $_GET['type'];
 
 if (!$type) {
@@ -191,18 +187,19 @@ if (!$type) {
             $user1 = $_POST['user1'];
             $user2 = $_POST['user2'];
             $anggota = $user1.' , '.$user2;
+            $ketua = $_SESSION['username'];
 
-            $maketeam="INSERT INTO team (id_team, kategori, nama_team ,anggota) VALUES (NULL, '$kategori', '$namatim', '$anggota')";
-            $result = mysqli_query($koneksi,$maketeam);
+            $maketeam="INSERT INTO team (id_team, kategori, nama_team, ketua ,anggota) VALUES (NULL, '$kategori', '$namatim', '$ketua', '$anggota')";
+            $result = mysqli_query($con,$maketeam);
             if ($result) {
           echo "<script>
-             alert('berhasil buat tim')
-            window.location='index2.php'
+             alert('$ketua, berhasil buat tim')
+            window.location='profil_player.php'
              </script>";
         }else {
            echo "<script>
            alert('gagal buat tim')
-           window.location='index2.php'
+           window.location='maketeam.php'
           </script>";
         }
             break;
@@ -213,19 +210,20 @@ if (!$type) {
             $user2 = $_POST['user2'];
             $user3 = $_POST['user3'];
             $user4 = $_POST['user4'];
-            $anggota = $user1.' , '.$user2.' , '.$user3.' , '.$user4;
+            $anggota = $user1.' , '.$user2.' , '.$user3.' , '.$user4;      
+            $ketua = $_SESSION['username'];
 
-            $maketeam="INSERT INTO team (id_team, kategori, nama_team ,anggota) VALUES (NULL, '$kategori', '$namatim', '$anggota')";
+            $maketeam="INSERT INTO team (id_team, kategori, nama_team, ketua ,anggota) VALUES (NULL, '$kategori', '$namatim','$ketua' '$anggota')";
             $result = mysqli_query($koneksi,$maketeam);
             if ($result) {
           echo "<script>
              alert('berhasil buat tim')
-            window.location='index2.php'
+            window.location='profil_player.php'
              </script>";
         }else {
            echo "<script>
            alert('gagal buat tim')
-           window.location='index2.php'
+           window.location='maketeam.php'
           </script>";
         }
 
@@ -238,11 +236,11 @@ if (!$type) {
       }
 }
 ?>
-      <!-- <?php
+      
+<?php }
+?>
 
-    }
-
-    ?> -->
+    
 
  
   </div>

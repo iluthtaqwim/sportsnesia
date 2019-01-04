@@ -7,14 +7,14 @@ if(isset($_POST['daftar'])){
     $password = md5($_POST['pass']); 
     $phone = addslashes(strip_tags ($_POST['phone'])); 
 
-    $query = "INSERT INTO user VALUES ('','$username','$email','$phone','$password')";
+    $query = "INSERT INTO user (id, username, email ,phone, password, foto_profilUser) VALUES ('','$username','$email','$phone','$password','')";
     $sql_insert = mysqli_query($con, $query);
     
     if ($sql_insert){
         // kalau berhasil alihkan ke halaman index.php dengan status=sukses
         echo "<script>
         alert('Anda Sudah Melakukan Pendaftaran')
-        window.location='login_user.html'
+        window.location='loginUser.php'
         </script>";
     } else {
         // kalau gagal alihkan ke halaman indek.php dengan status=gagal

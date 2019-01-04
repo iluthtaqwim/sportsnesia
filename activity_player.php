@@ -68,10 +68,7 @@
                           <span class="sr-only">Toggle Dropdown</span>
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a href="buat_tim.html">Buat Tim</a></li>
-                          
-                          <li role="separator" class="divider"></li>
-                          <li><a href="#">Pengaturan</a></li>
+                          <li><a href="maketeam.php">Buat Tim</a></li>
                         </ul>
                       </li>
 

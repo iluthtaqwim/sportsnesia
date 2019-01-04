@@ -10,6 +10,8 @@
 
         $aktifitas = mysqli_query($con, "select * from aktifitas where username = '".$row['username']."'order by id desc");
         $user_aktifitas = mysqli_fetch_array($aktifitas);
+
+        $team = mysqli_query($con, "select * from team where ketua = '".$_SESSION['username']."'order by id_team desc");
 ?>
 
 <!DOCTYPE html>
@@ -77,10 +79,7 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="tim.html">Tim</a></li>
-
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Pengaturan</a></li>
+                            <li><a href="maketeam.php">Buat Tim</a></li>
                         </ul>
                     </li>
 
@@ -145,6 +144,7 @@
 
         <div class="features-container section-container">
             <div class="container">
+            <div class="row">
                 <h3>Riwayat Buat Aktifitas</h3>
 
                 <?php 
@@ -171,7 +171,31 @@
                     </div>
                 </div>
                     <?php } ?>
+                    </div>
+                    <div class="row">
+                    <h3>Riwayat Buat Team</h3>
 
+                    <?php 
+                    foreach($team as $maketeam){
+                        ?>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail" class="card p-3">
+                        <div class="w3-display-container">
+                            <div class="container" class="div.relative">
+                                <div class="w3-display-bottommiddle w3-container" class="bg-1">
+                                
+                                    <p>Nama Tim : <?php echo $maketeam['nama_team']; ?></p>
+                                    <p>Ketua : <?php echo $maketeam['ketua']; ?></p>
+                                    <p>Jenis Olahraga : <?php echo $maketeam['kategori']; ?></p>
+                                    <p>Anggota : <?php echo $maketeam['anggota']; ?></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <?php } ?>
+                    </div>
             </div>
         </div>
 

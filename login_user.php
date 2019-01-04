@@ -4,7 +4,7 @@ include "db.php";
 if (isset($_POST["login"]))
         {
 $username = $_POST['username']; 
-$password = $_POST['password']; 
+$password = md5($_POST['password']); 
 
     $queryLogin = mysqli_query($con,"select * from user where username='$username' and password='$password'");
     $row = mysqli_fetch_array($queryLogin,MYSQLI_ASSOC);
@@ -19,8 +19,8 @@ $password = $_POST['password'];
             </script>";
     
     }else{
-       echo "<script>alert('Username atau password anda salah, Coba cek kembali.')
-                window.location='login_user.html'
+       echo "<script>alert('$password , Username atau password anda salah, Coba cek kembali.')
+                window.location='loginUser.php'
             </script>";
     }
 }
